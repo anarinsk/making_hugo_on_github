@@ -11,16 +11,11 @@ Hugo를 github 위에 올리는 법에 관한 자기 튜토리얼이다.
 
 생략
 
-## github repo 새성 (in github.com)
+## github repo 생성 (in github.com)
 
 새로운 리포를 생성한다. 이름은 YOUR_NAME.github.io
-
-### master / sources branch 생성 (in gutub.com)
-
-깃허브 페이지 상에서 branch를 생성한다.
-
-  * 새로운 브렌치 이름은 sources, 그리도 default branch를 sources로 바꿔준다.
-  * 브랜치를 생성한 이후 github desktop에서 sync를 눌러주거나
+README.md 파일을 포함해서 생성하는 것이 좋다.
+해당 폴더의 터미널에서 `git clone YOUR_GITHUB_REPO_NAME`을 쳐서 복사해온다.
 
 ## Hugo 및 관련 홈페이지 파일 생성 (in RStudio)
 
@@ -40,7 +35,7 @@ install_hugo()
 
 휴고 설치는 또 해줄 필요는 없다.
 
-### Hugo papge 생성
+### Hugo page 생성
 
 ```{R}
 library(blogdown)
@@ -60,9 +55,17 @@ install_theme("kishaningithub/hugo-creative-portfolio-theme", theme_example = TR
 
 ## Setup & Deploy
 
-setup.sh 파일을 실행하여 sources / master 브랜치를 초기화한다.
-해당 파일을 github local에 넣고 스크립트를 terminal에서 실행한다.  
-bash 스크립트 안에 게정 이름과 소스 이름을 바꿔주는 것을 잊지 말도록
+### master / sources branch 생성 (in gutub.com)
+
+깃허브 페이지 상에서 branch를 생성한다.
+
+  * 새로운 브렌치 이름은 sources, 그리고 settings에서 default branch를 sources로 바꿔준다.
+  * 브랜치를 생성한 이후 github desktop에서 sync를 눌러주거나 혹은 terminal에서 'git fetch' 입력한다.
+
+### setup 실행
+  * setup.sh 파일을 실행하여 sources / master 브랜치를 초기화한다.
+  * 해당 파일을 github local에 넣고 스크립트를 terminal에서 실행한다.  
+  * bash 스크립트 안에 게정 이름과 소스 이름을 바꿔주는 것을 잊지 말도록
 
 ```bash
 #!/usr/bin/env bash
@@ -118,9 +121,16 @@ git subtree pull --prefix=public \
 
 이후에 github commit 및 동기화를 실시한다.
 
+```git
+git status
+git add .
+git commit -m "my messege"
+git push
+```
+
 ### deploy
 
-블로그 포스트를 추가하거나 콘텐츠의 변화가 있을 경우 디플로이를 해주는 과정이 필요하다.
+블로그 포스트를 추가하거나 콘텐츠의 변화가 있을 경우 디플로이를 해주는 과정이 필요하다. terminal에서 `bash deploy.sh`
 
 ```bash
 #!/usr/bin/env bash
